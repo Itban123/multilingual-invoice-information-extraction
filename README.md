@@ -31,44 +31,11 @@ The system extracts 11 invoice fields.
 
 ## System Architecture
 
-```text
-                  Invoice PDF
-                       |
-                       v
-             PDF Rendering + OCR
-                       |
-                       v
-              OCR Words + Boxes
-                       |
-                       v
-                LayoutLMv3
-                       |
-                       v
-          Token Labels + Soft Logits
-                       |
-            +----------+----------+
-            |                     |
-            v                     v
-      Predicted Entities     Candidate Recovery
-            |                     |
-            v                     v
-      Party Block Pairing    Soft Name/Email Pool
-            |                     |
-            v                     v
-      Block-Level Role       Party-ness Scoring
-        Classification             |
-            |                     v
-            |              Constrained 4-Slot
-            |                 Assignment
-            |                     |
-            +----------+----------+
-                       |
-                       v
-          Confidence-Gated Correction
-                       |
-                       v
-             Structured Invoice Data
-```
+<p align="center">
+  <img src="./multilingual-invoice-information-extraction.png"
+       alt="Multilingual Invoice Information Extraction Pipeline"
+       width="650">
+</p>
 
 ### Stage 1: LayoutLMv3 Information Extraction
 
